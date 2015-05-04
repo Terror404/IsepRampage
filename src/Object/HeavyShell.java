@@ -4,8 +4,8 @@ import java.awt.Color;
 
 public class HeavyShell extends Shell {
 	
-	public HeavyShell(int positionSx, int positionSy){
-		super(positionSx,positionSy);
+	public HeavyShell(int positionSx, int positionSy, double initPosSx, double initPosSy){
+		super(positionSx,positionSy,initPosSx,initPosSy);
 	}
 	
 	public void display(){

@@ -47,8 +47,10 @@ public class Environement extends JComponent {
     private int fired;
     private int typeShell;
     private int setShell;
-    private int positionXShell;
-    private int positionYShell;
+    private double positionXShell;
+    private double positionYShell;
+    private double initPosSx;
+    private double initPosSy;
 
     public static Image BACKGROUND = Toolkit.getDefaultToolkit().createImage("nom.jpg");
 
@@ -130,9 +132,9 @@ public class Environement extends JComponent {
                //**********************************************
                
                
-               System.out.println("code touche = " + IsepRampage.keyPressed);
+        System.out.println("code touche = " + IsepRampage.keyPressed);
         System.out.println("colorShell = " + colorShell);
-        System.out.println("colorShell = " + typeShell);
+        System.out.println("typeShellShell = " + typeShell);
         
         
         if (fired == 0){
@@ -165,36 +167,53 @@ public class Environement extends JComponent {
             if (setShell == 0){
                 positionXShell = positionXleftTank;
                 positionYShell = positionYleftTank;
+                initPosSx = positionXleftTank;
+                initPosSy = positionYleftTank;
                 setShell = 1;
             }
             else{
             }
             
-            if(typeShell == 1){ 
-                NormalShell launchedShell = new NormalShell(positionXShell, positionYShell);
-                
-                System.out.println("position en x : " + positionXShell);
-                System.out.println("position en y : " + positionYShell);
-                
-                launchedShell.move();
-                new DrawShell(g2d, launchedShell, positionXShell, positionYShell, colorShell);
-                positionXShell = launchedShell.positionSx;
-                positionYShell = launchedShell.positionSy;
+            if(IsepRampage.keyPressed != 522){
+                if(typeShell == 1){ 
+                    NormalShell launchedShell = new NormalShell(positionXShell, positionYShell, initPosSx, initPosSy);
+
+                    System.out.println("position en x : " + positionXShell);
+                    System.out.println("position en y : " + positionYShell);
+
+                    launchedShell.move();
+                    new DrawShell(g2d, launchedShell, positionXShell, positionYShell, colorShell);
+                    positionXShell = launchedShell.positionSx;
+                    positionYShell = launchedShell.positionSy;
+                }
+
+                else if (typeShell == 2){        
+                    HeavyShell launchedShell = new HeavyShell(positionXleftTank, positionYleftTank, initPosSx, initPosSy);
+                    launchedShell.move();
+                    new DrawShell(g2d, launchedShell, launchedShell.positionSx, launchedShell.positionSy, colorShell);
+                }
+
+                else if (typeShell == 3){
+                    ClusterShell launchedShell = new ClusterShell(positionXShell, positionYShell, initPosSx, initPosSy);
+
+                    launchedShell.move();
+                    new DrawShell(g2d, launchedShell, positionXShell, positionYShell, colorShell);
+
+                    positionXShell = launchedShell.positionSx;
+                    positionYShell = launchedShell.positionSy;
+                }
+                else if (typeShell == 4){
+                    SabotShell launchedShell = new SabotShell(positionXleftTank, positionYleftTank, initPosSx, initPosSy);
+                    launchedShell.move();
+                    new DrawShell(g2d, launchedShell, launchedShell.positionSx, launchedShell.positionSy, colorShell);
+                }
             }
-            else if (typeShell == 2){        
-                HeavyShell launchedShell = new HeavyShell(positionXleftTank, positionYleftTank);
-                launchedShell.move();
-                new DrawShell(g2d, launchedShell, launchedShell.positionSx, launchedShell.positionSy, colorShell);
-            }
-            else if (typeShell == 3){
-                ClusterShell launchedShell = new ClusterShell(positionXleftTank, positionYleftTank);
-                launchedShell.move();
-                new DrawShell(g2d, launchedShell, launchedShell.positionSx, launchedShell.positionSy, colorShell);
-            }
-            else if (typeShell == 4){
-                SabotShell launchedShell = new SabotShell(positionXleftTank, positionYleftTank);
-                launchedShell.move();
-                new DrawShell(g2d, launchedShell, launchedShell.positionSx, launchedShell.positionSy, colorShell);
+            else{
+                typeShell = 0;
+                colorShell = 0;
+                fired = 0;
+                positionXShell = positionXleftTank;
+                positionYShell = positionYleftTank; 
             }
             
             
