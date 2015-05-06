@@ -6,7 +6,9 @@ import java.util.logging.Logger;
 
 public class NormalShell extends Shell {
     
-    private double loopVarShell = 0;
+    private double initialSpeed = 200;
+    public double gravity = 9.81;
+    public double timeMultiplerXpos = 1;
 	
     public NormalShell(double positionSx, double positionSy, double initPosSx, double initPosSy){
             super(positionSx,positionSy,initPosSx,initPosSy);
@@ -20,14 +22,22 @@ public class NormalShell extends Shell {
 
     }
 
-    public void move(){
-        if (positionSx < initPosSx + 100){        
-            positionSx = positionSx + 1;
-            positionSy = positionSy; 
+    public void move(double gunAngle, double time){
+        if (gunAngle > 0 && gunAngle < (Math.PI)/2){
+            positionSx = initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
+            positionSy = (gravity * time * time)/2 + initialSpeed * Math.sin(gunAngle) * time + initPosSy;
         }
-        else{
-            positionSx = positionSx + 1;
-            positionSy = positionSy + 0.2;
+        else if (gunAngle > (Math.PI)/2 && gunAngle < Math.PI){
+            positionSx = - initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
+            positionSy = (gravity * time * time)/2 + initialSpeed * Math.sin(gunAngle) * time + initPosSy;
+        }
+        else if (gunAngle > Math.PI && gunAngle < (3*(Math.PI)/2)){
+            positionSx = - initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
+            positionSy = (gravity * time * time)/2 - initialSpeed * Math.sin(gunAngle) * time + initPosSy;
+        }
+        else if (gunAngle > 3*(Math.PI)/2 && gunAngle < 2*(Math.PI)){
+            positionSx = initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
+            positionSy = (gravity * time * time)/2 - initialSpeed * Math.sin(gunAngle) * time + initPosSy;
         }
     }
 }

@@ -49,8 +49,12 @@ public class Environement extends JComponent {
     private int setShell;
     private double positionXShell;
     private double positionYShell;
-    private double initPosSx;
-    private double initPosSy;
+    private double initPosSx = positionXleftTank;
+    private double initPosSy = positionYleftTank;
+    public double gunAngle;
+    public double gunAngle2;
+    public double time = 0;
+    public double incrementTime = 0.01;
 
     public static Image BACKGROUND = Toolkit.getDefaultToolkit().createImage("nom.jpg");
 
@@ -96,6 +100,7 @@ public class Environement extends JComponent {
 
         
 //************  CREATE THE TANKS **********************************************        
+        
             Tank leftTank = new Tank(positionXleftTank, positionYleftTank - (floorMemoryY[positionXleftTank / 5] - floorMemoryY[(positionXleftTank / 5) + 1]),positionGunXleftTank,positionGunYleftTank,100);
             Tank rightTank = new Tank(positionXrightTank, positionYrightTank - (floorMemoryY[positionXrightTank / 5] - floorMemoryY[(positionXrightTank / 5) + 1]),positionXrightTank-2,positionYrightTank - (floorMemoryY[positionXrightTank / 5] - floorMemoryY[(positionXrightTank / 5) + 1])+5,100);
 
@@ -135,8 +140,10 @@ public class Environement extends JComponent {
         System.out.println("code touche = " + IsepRampage.keyPressed);
         System.out.println("colorShell = " + colorShell);
         System.out.println("typeShellShell = " + typeShell);
+        System.out.println("temps = " + time);
         
-        
+
+// ********* HANDLE KEYBOARD EVENTS - SHELL CHOICE AND TRIGGER *************
         if (fired == 0){
             if(IsepRampage.keyPressed == 49){           /*  touche "&"  */
                 typeShell = 1;
@@ -160,6 +167,33 @@ public class Environement extends JComponent {
             }
         }
         
+        // ************* DETERMINATION OF THE GUN ANGLE *******************
+        
+        if (positionYleftTank < positionGunYleftTank){
+            if (positionGunXleftTank < positionXleftTank){
+                gunAngle2 = Math.toRadians(Math.atan2((positionGunYleftTank - positionYleftTank), (positionGunXleftTank - positionXleftTank)));
+                gunAngle = Math.PI + gunAngle2;
+            }
+            else{
+                gunAngle2 = Math.toRadians(Math.atan2((positionGunYleftTank - positionYleftTank), (positionXleftTank - positionGunXleftTank)));
+                gunAngle = 2 * Math.PI - gunAngle2;
+            }
+        }
+        else{
+            if(positionGunXleftTank < positionXleftTank){
+                gunAngle2 = Math.toRadians(Math.atan2((positionYleftTank - positionGunYleftTank), (positionGunXleftTank - positionXleftTank)));
+                gunAngle = Math.PI - gunAngle2;
+            }
+            else{
+                gunAngle = Math.toRadians(Math.atan2((positionYleftTank - positionGunYleftTank), (positionXleftTank - positionGunXleftTank)));
+            }
+        }
+        
+        System.out.println("angle du canon " + gunAngle);
+        
+        
+        
+        // ************* SHELL CREATION AND TRAJECTORY ********************
         if (fired == 1){
             
         System.out.println("setShell : " + setShell);
@@ -180,32 +214,43 @@ public class Environement extends JComponent {
 
                     System.out.println("position en x : " + positionXShell);
                     System.out.println("position en y : " + positionYShell);
+                    System.out.println("temps : " + time);
 
-                    launchedShell.move();
+                    launchedShell.move(gunAngle, time);
                     new DrawShell(g2d, launchedShell, positionXShell, positionYShell, colorShell);
                     positionXShell = launchedShell.positionSx;
                     positionYShell = launchedShell.positionSy;
+                    time = time + incrementTime;
                 }
 
                 else if (typeShell == 2){        
-                    HeavyShell launchedShell = new HeavyShell(positionXleftTank, positionYleftTank, initPosSx, initPosSy);
-                    launchedShell.move();
+                    HeavyShell launchedShell = new HeavyShell(positionXShell, positionYShell, initPosSx, initPosSy);
+                    launchedShell.move(gunAngle, time);
                     new DrawShell(g2d, launchedShell, launchedShell.positionSx, launchedShell.positionSy, colorShell);
+                    
+                    positionXShell = launchedShell.positionSx;
+                    positionYShell = launchedShell.positionSy;
+                    time = time + incrementTime;
                 }
 
                 else if (typeShell == 3){
                     ClusterShell launchedShell = new ClusterShell(positionXShell, positionYShell, initPosSx, initPosSy);
 
-                    launchedShell.move();
+                    launchedShell.move(gunAngle, time);
                     new DrawShell(g2d, launchedShell, positionXShell, positionYShell, colorShell);
 
                     positionXShell = launchedShell.positionSx;
                     positionYShell = launchedShell.positionSy;
+                    time = time + incrementTime;
                 }
                 else if (typeShell == 4){
-                    SabotShell launchedShell = new SabotShell(positionXleftTank, positionYleftTank, initPosSx, initPosSy);
-                    launchedShell.move();
+                    SabotShell launchedShell = new SabotShell(positionXShell, positionYShell, initPosSx, initPosSy);
+                    launchedShell.move(gunAngle, time);
                     new DrawShell(g2d, launchedShell, launchedShell.positionSx, launchedShell.positionSy, colorShell);
+                    
+                    positionXShell = launchedShell.positionSx;
+                    positionYShell = launchedShell.positionSy;
+                    time = time + incrementTime;
                 }
             }
             else{
@@ -214,6 +259,7 @@ public class Environement extends JComponent {
                 fired = 0;
                 positionXShell = positionXleftTank;
                 positionYShell = positionYleftTank; 
+                time = 0;
             }
             
             

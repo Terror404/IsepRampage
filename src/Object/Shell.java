@@ -10,6 +10,8 @@ public abstract class Shell {
 	public double positionSy;
         public double initPosSx;
         public double initPosSy;
+        public double gunAngle;
+        public double time;
 	protected Color c;
 	
 	public Shell (double positionSx, double positionSy, double initPosSx, double initPosSy){
@@ -21,5 +23,5 @@ public abstract class Shell {
 	
 	abstract void display();
 	
-	abstract void move();
+	abstract void move(double gunAngle, double time);
 }
