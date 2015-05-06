@@ -8,7 +8,7 @@ public class NormalShell extends Shell {
     
     private double initialSpeed = 50;
     public double gravity = 9.81;
-    public double timeMultiplerXpos = 1;
+    public double timeMultiplerXpos = 2;
 	
     public NormalShell(double positionSx, double positionSy, double initPosSx, double initPosSy){
             super(positionSx,positionSy,initPosSx,initPosSy);

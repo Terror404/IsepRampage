@@ -4,8 +4,8 @@ import java.awt.Color;
 
 public class ClusterShell extends Shell {
     
-    private double initialSpeed = 100;
-    public double gravity = 2;
+    private double initialSpeed = 50;
+    public double gravity = 9.81;
     public double timeMultiplerXpos = 2;
 	
 	public ClusterShell(double positionSx, double positionSy, double initPosSx, double initPosSy){
