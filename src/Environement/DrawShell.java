@@ -14,19 +14,19 @@ import javax.swing.JComponent;
         
         if (c == 1){
             g2d.setColor(Color.yellow);
-            g2d.fillOval((int)positionX,(int)positionY,15,10);
+            g2d.fillOval((int)positionX,(int)positionY,15,5);
         }
         else if (c == 2){
             g2d.setColor(Color.red);
-            g2d.fillOval((int)positionX,(int)positionY,15,10);
+            g2d.fillOval((int)positionX,(int)positionY,15,5);
         }
         else if (c ==3){
             g2d.setColor(Color.black);
-            g2d.fillOval((int)positionX,(int)positionY,15,10);                    
+            g2d.fillOval((int)positionX,(int)positionY,15,5);                    
         }
         else if (c == 4){
             g2d.setColor(Color.gray);
-            g2d.fillOval((int)positionX,(int)positionY,15,10);
+            g2d.fillOval((int)positionX,(int)positionY,15,5);
         }
         
         

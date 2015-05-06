@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 public class NormalShell extends Shell {
     
-    private double initialSpeed = 200;
+    private double initialSpeed = 50;
     public double gravity = 9.81;
     public double timeMultiplerXpos = 1;
 	

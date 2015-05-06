@@ -55,6 +55,8 @@ public class Environement extends JComponent {
     public double gunAngle2;
     public double time = 0;
     public double incrementTime = 0.01;
+    
+    public int setWind = 0;
 
     public static Image BACKGROUND = Toolkit.getDefaultToolkit().createImage("nom.jpg");
 
@@ -208,7 +210,7 @@ public class Environement extends JComponent {
             else{
             }
             
-            if(IsepRampage.keyPressed != 522){
+            if(IsepRampage.keyPressed != 522 && positionXShell < 1280 && positionXShell > 0 && positionYShell<720 && positionYShell>0 ){
                 if(typeShell == 1){ 
                     NormalShell launchedShell = new NormalShell(positionXShell, positionYShell, initPosSx, initPosSy);
 
@@ -284,6 +286,10 @@ public class Environement extends JComponent {
             positionGunXleftTank=leftTank.positionGunX;
             positionGunYleftTank=leftTank.positionGunY;
         }
+
+
+
+
     
     }
 
