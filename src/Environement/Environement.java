@@ -182,19 +182,25 @@ public class Environement extends JComponent {
                 positionYShell = launchedShell.positionSy;
             }
             else if (typeShell == 2){        
-                HeavyShell launchedShell = new HeavyShell(positionXleftTank, positionYleftTank);
+                HeavyShell launchedShell = new HeavyShell(positionXShell, positionYShell);
                 launchedShell.move();
                 new DrawShell(g2d, launchedShell, launchedShell.positionSx, launchedShell.positionSy, colorShell);
+                positionXShell = launchedShell.positionSx;
+                positionYShell = launchedShell.positionSy;
             }
             else if (typeShell == 3){
-                ClusterShell launchedShell = new ClusterShell(positionXleftTank, positionYleftTank);
+                ClusterShell launchedShell = new ClusterShell(positionXShell,positionYShell);
                 launchedShell.move();
                 new DrawShell(g2d, launchedShell, launchedShell.positionSx, launchedShell.positionSy, colorShell);
+                positionXShell = launchedShell.positionSx;
+                positionYShell = launchedShell.positionSy;
             }
             else if (typeShell == 4){
-                SabotShell launchedShell = new SabotShell(positionXleftTank, positionYleftTank);
+                SabotShell launchedShell = new SabotShell(positionXShell, positionYShell);
                 launchedShell.move();
                 new DrawShell(g2d, launchedShell, launchedShell.positionSx, launchedShell.positionSy, colorShell);
+                positionXShell = launchedShell.positionSx;
+                positionYShell = launchedShell.positionSy;
             }
             
             

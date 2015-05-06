@@ -6,6 +6,8 @@ public class SabotShell extends Shell {
 	
 	public SabotShell(int positionSx, int positionSy){
 		super(positionSx,positionSy);
+                this.positionSx = positionSx;
+                this.positionSy = positionSy;
 	}
 	
 	public void display(){
