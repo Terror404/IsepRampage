@@ -55,6 +55,7 @@ public class Environement extends JComponent {
     public double gunAngle2;
     public double time = 0;
     public double incrementTime = 0.01;
+    public static int shellCollided=0;
     
     public int setWind = 0;
 
@@ -77,7 +78,7 @@ public class Environement extends JComponent {
         if (drawEnvironement == true) {
             
             f=f+1;
-            System.out.println(f);
+            
             
             new DrawG(g2d);
             try {
@@ -119,9 +120,11 @@ public class Environement extends JComponent {
                     leftTank.moveTankLeft();
                     
                     
+                    
                 }
                 else if(IsepRampage.keyPressed==39 && leftTank.positionY<floorMemoryY[(int)(leftTank.positionX/5)+2]+5){//if we press the right button and there isn't a mountain ahead of the tank
                     leftTank.moveTankRight();
+                    
                     
                 
                 }
@@ -138,11 +141,11 @@ public class Environement extends JComponent {
                
                //**********************************************
                
-               
+         /*      
         System.out.println("code touche = " + IsepRampage.keyPressed);
         System.out.println("colorShell = " + colorShell);
         System.out.println("typeShellShell = " + typeShell);
-        System.out.println("temps = " + time);
+        System.out.println("temps = " + time);*/
         
 
 // ********* HANDLE KEYBOARD EVENTS - SHELL CHOICE AND TRIGGER *************
@@ -191,32 +194,34 @@ public class Environement extends JComponent {
             }
         }
         
-        System.out.println("angle du canon " + gunAngle);
+        
         
         
         
         // ************* SHELL CREATION AND TRAJECTORY ********************
         if (fired == 1){
             
-        System.out.println("setShell : " + setShell);
+       
             
             if (setShell == 0){
-                positionXShell = positionXleftTank;
-                positionYShell = positionYleftTank;
+                positionXShell = leftTank.positionGunX;
+                positionYShell = leftTank.positionGunY;
                 initPosSx = positionXleftTank;
                 initPosSy = positionYleftTank;
                 setShell = 1;
             }
             else{
-            }
             
-            if(IsepRampage.keyPressed != 522 && positionXShell < 1280 && positionXShell > 0 && positionYShell<720 /*&& positionYShell>0 && (int) positionXShell != floorMemoryX[(int)positionXShell] && (int) positionYShell != floorMemoryY[(int)positionYShell]*/){
+            
+            if(IsepRampage.keyPressed != 522 && positionXShell < 1280 && positionXShell > 0 && positionYShell<720 && (int) (positionYShell+5) != (int)(floorMemoryY[(int)(positionXShell+15)/5]+5)/5 && shellCollided==0){
+                 /*System.out.println("position en y : " + positionYShell+5 );
+                 System.out.println(floorMemoryY[(int)(positionXShell-15)/5]);*/
                 if(typeShell == 1){ 
                     NormalShell launchedShell = new NormalShell(positionXShell, positionYShell, initPosSx, initPosSy);
-
-                    System.out.println("position en x : " + positionXShell);
-                    System.out.println("position en y : " + positionYShell);
-                    System.out.println("temps : " + time);
+/*
+                    System.out.println("position en x : " + positionXShell);*/
+                   /*
+                    System.out.println("temps : " + time);*/
 
                     launchedShell.move(gunAngle, time);
                     new DrawShell(g2d, launchedShell, positionXShell, positionYShell, colorShell);
@@ -268,11 +273,18 @@ public class Environement extends JComponent {
                 positionXShell = positionXleftTank;
                 positionYShell = positionYleftTank; 
                 time = 0;
+                setShell=0;
+                if(shellCollided==1){
+                
+                
+                shellCollided=0;
+            }
+            }
             }
             
             
-            
         }
+        
         
         
         
@@ -294,7 +306,7 @@ public class Environement extends JComponent {
         }
 
             //**************** WIND CREATION **************************
-        System.out.println("setWind = " + setWind);
+        
         
         Wind vent = new Wind(setWind);
     
