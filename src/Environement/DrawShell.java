@@ -34,6 +34,6 @@ import javax.swing.JComponent;
         
         
         
-        System.out.println("je me dessine bien");
+        
     }
 }
