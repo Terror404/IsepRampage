@@ -262,6 +262,7 @@ public class Environement extends JComponent {
                 positionXShell = positionXleftTank;
                 positionYShell = positionYleftTank; 
                 time = 0;
+                setShell = 0;
             }
             
             
@@ -288,8 +289,7 @@ public class Environement extends JComponent {
         }
 
             //**************** WIND CREATION **************************
-        System.out.println("setWind = " + setWind);
-        
+       
         Wind vent = new Wind(setWind);
     
         vent.WindCreation(g2d);
