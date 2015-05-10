@@ -171,23 +171,23 @@ public class Environement extends JComponent {
         
         // ************* DETERMINATION OF THE GUN ANGLE *******************
         
-        if (positionYleftTank < positionGunYleftTank){
-            if (positionGunXleftTank < positionXleftTank){
-                gunAngle2 = Math.toRadians(Math.atan2((positionGunYleftTank - positionYleftTank + 5), (positionGunXleftTank - positionXleftTank + 5)));
+        if (positionYleftTank + 5 < positionGunYleftTank){
+            if (positionGunXleftTank < positionXleftTank + 5){
+                gunAngle2 = (Math.atan2((positionGunYleftTank - positionYleftTank + 5), (positionXleftTank + 5 - positionGunXleftTank)));
                 gunAngle = Math.PI + gunAngle2;
             }
             else{
-                gunAngle2 = Math.toRadians(Math.atan2((positionGunYleftTank - positionYleftTank + 5), (positionXleftTank - positionGunXleftTank + 5)));
+                gunAngle2 = (Math.atan2((positionGunYleftTank - positionYleftTank + 5), (positionGunXleftTank - positionXleftTank + 5 )));
                 gunAngle = 2 * Math.PI - gunAngle2;
             }
         }
         else{
-            if(positionGunXleftTank < positionXleftTank){
-                gunAngle2 = Math.toRadians(Math.atan2((positionYleftTank - positionGunYleftTank + 5), (positionGunXleftTank - positionXleftTank + 5)));
+            if(positionGunXleftTank < positionXleftTank + 5){
+                gunAngle2 = (Math.atan2((positionYleftTank + 5 - positionGunYleftTank), (positionXleftTank + 5 - positionGunXleftTank)));
                 gunAngle = Math.PI - gunAngle2;
             }
             else{
-                gunAngle = Math.toRadians(Math.atan2((positionYleftTank - positionGunYleftTank + 5), (positionXleftTank - positionGunXleftTank + 5)));
+                gunAngle = (Math.atan2((positionYleftTank - positionGunYleftTank + 5), (positionGunXleftTank - positionXleftTank + 5)));
             }
         }
         
