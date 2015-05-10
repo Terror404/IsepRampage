@@ -306,8 +306,7 @@ public class Environement extends JComponent {
         }
 
             //**************** WIND CREATION **************************
-        
-        
+       
         Wind vent = new Wind(setWind);
     
         vent.WindCreation(g2d);
