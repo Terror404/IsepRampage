@@ -7,58 +7,82 @@ import javax.swing.JComponent;
 
 public class Wind {
     
-    public int windPicker;
-    public int windPower;
-    public String force0 = "Pas de vent";
-    public String force1 = "Vent force 10";
-    public String force2 = "Vent force 20";
-    public String force3 = "Vent force 30";
+    public static int windPicker;
+    public static int windDirection;
+    public static int randomWp;
+    public static int randomWd;
     
     
-    public Wind(int setWind, Graphics2D g2d){
-        if (setWind == 0){
-            windPicker = (int) (Math.random() * 3);
+    public Wind(int setWind){
+        if(setWind !=1){
+            randomWp = (int) (Math.random() * 4);
+            randomWd = (int) (Math.random() * 2);
+            windPicker = randomWp;
+            windDirection = randomWd;  
         }
+        else{
+            
+        }
+    }
+    
+    
+    public void WindCreation(Graphics2D g2d){
         
-            switch (windPicker){
-                case 0 :
-                    windPower = 0;
-                    break;
-                case 1 : 
-                    windPower = 10;
-                    break;
-                case 2 :
-                    windPower = 20;
-                    break;
-                case 3 :
-                    windPower = 30;
-                    break;
-            }
-
         
-        System.out.println("nombre aléatoire = " + windPicker);
-        System.out.println("Force du vent = " + windPower);
-        
-        switch (windPower){
+        switch (windPicker){
             case 0 :
                 g2d.setColor(Color.BLUE);
-                g2d.fillOval(50,50,30,30);
                 g2d.drawString("Pas de vent", 30, 35);
+                g2d.fillOval(50, 50, 10, 10);
+                
                 break;
-            case 10 :
+            case 1 :
                 g2d.setColor(Color.BLUE);
-                g2d.fillOval(50,50,30,30);
                 g2d.drawString("Vent force 10", 30, 35);
+                
+                if (windDirection == 0){
+                    int xpoints[] = {50,60,60,90,90,60,60};
+                    int ypoints[] = {50,30,40,40,60,60,70};  
+                    g2d.fillPolygon(xpoints, ypoints, 7);
+                }
+                else if (windDirection == 1){
+                    int xpoints[] = {90,80,80,50,50,80,80};
+                    int ypoints[] = {50,70,60,60,40,40,30};
+                    g2d.fillPolygon(xpoints, ypoints, 7);
+                }
+                
                 break;
-            case 20 :
+            case 2 :
                 g2d.setColor(Color.BLUE);
-                g2d.fillOval(50,50,30,30);
                 g2d.drawString("Vent force 20", 30, 35);
+                
+                if (windDirection == 0){
+                    int xpoints[] = {50,60,60,90,90,60,60};
+                    int ypoints[] = {50,30,40,40,60,60,70};  
+                    g2d.fillPolygon(xpoints, ypoints, 7);
+                }
+                else if (windDirection == 1){
+                    int xpoints[] = {90,80,80,50,50,80,80};
+                    int ypoints[] = {50,70,60,60,40,40,30};
+                    g2d.fillPolygon(xpoints, ypoints, 7);
+                }
+                
                 break;
-            case 30 : 
+            case 3 : 
                 g2d.setColor(Color.BLUE);
-                g2d.fillOval(50,50,30,30);
                 g2d.drawString("Vent force 30", 30, 35);
+                
+                if (windDirection == 0){
+                    int xpoints[] = {50,60,60,90,90,60,60};
+                    int ypoints[] = {50,30,40,40,60,60,70};  
+                    g2d.fillPolygon(xpoints, ypoints, 7);
+                }
+                else if (windDirection == 1){
+                    int xpoints[] = {90,80,80,50,50,80,80};
+                    int ypoints[] = {50,70,60,60,40,40,30};
+                    g2d.fillPolygon(xpoints, ypoints, 7);
+                }
+                
                 break;
         }
     }

@@ -173,21 +173,21 @@ public class Environement extends JComponent {
         
         if (positionYleftTank < positionGunYleftTank){
             if (positionGunXleftTank < positionXleftTank){
-                gunAngle2 = Math.toRadians(Math.atan2((positionGunYleftTank - positionYleftTank), (positionGunXleftTank - positionXleftTank)));
+                gunAngle2 = Math.toRadians(Math.atan2((positionGunYleftTank - positionYleftTank + 5), (positionGunXleftTank - positionXleftTank + 5)));
                 gunAngle = Math.PI + gunAngle2;
             }
             else{
-                gunAngle2 = Math.toRadians(Math.atan2((positionGunYleftTank - positionYleftTank), (positionXleftTank - positionGunXleftTank)));
+                gunAngle2 = Math.toRadians(Math.atan2((positionGunYleftTank - positionYleftTank + 5), (positionXleftTank - positionGunXleftTank + 5)));
                 gunAngle = 2 * Math.PI - gunAngle2;
             }
         }
         else{
             if(positionGunXleftTank < positionXleftTank){
-                gunAngle2 = Math.toRadians(Math.atan2((positionYleftTank - positionGunYleftTank), (positionGunXleftTank - positionXleftTank)));
+                gunAngle2 = Math.toRadians(Math.atan2((positionYleftTank - positionGunYleftTank + 5), (positionGunXleftTank - positionXleftTank + 5)));
                 gunAngle = Math.PI - gunAngle2;
             }
             else{
-                gunAngle = Math.toRadians(Math.atan2((positionYleftTank - positionGunYleftTank), (positionXleftTank - positionGunXleftTank)));
+                gunAngle = Math.toRadians(Math.atan2((positionYleftTank - positionGunYleftTank + 5), (positionXleftTank - positionGunXleftTank + 5)));
             }
         }
         
@@ -210,7 +210,7 @@ public class Environement extends JComponent {
             else{
             }
             
-            if(IsepRampage.keyPressed != 522 && positionXShell < 1280 && positionXShell > 0 && positionYShell<720 && positionYShell>0 ){
+            if(IsepRampage.keyPressed != 522 && positionXShell < 1280 && positionXShell > 0 && positionYShell<720 /*&& positionYShell>0 && (int) positionXShell != floorMemoryX[(int)positionXShell] && (int) positionYShell != floorMemoryY[(int)positionYShell]*/){
                 if(typeShell == 1){ 
                     NormalShell launchedShell = new NormalShell(positionXShell, positionYShell, initPosSx, initPosSy);
 
@@ -287,6 +287,14 @@ public class Environement extends JComponent {
             positionGunYleftTank=leftTank.positionGunY;
         }
 
+            //**************** WIND CREATION **************************
+        System.out.println("setWind = " + setWind);
+        
+        Wind vent = new Wind(setWind);
+    
+        vent.WindCreation(g2d);
+        
+        setWind = 1;
 
 
 

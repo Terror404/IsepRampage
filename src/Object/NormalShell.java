@@ -12,10 +12,6 @@ public class NormalShell extends Shell {
 	
     public NormalShell(double positionSx, double positionSy, double initPosSx, double initPosSy){
             super(positionSx,positionSy,initPosSx,initPosSy);
-            this.positionSx = positionSx;
-            this.positionSy = positionSy;
-            this.initPosSx = initPosSx;
-            this.initPosSy = initPosSy;
     }
 
     public void display(){
