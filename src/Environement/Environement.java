@@ -210,7 +210,7 @@ public class Environement extends JComponent {
             else{
             }
             
-            if(IsepRampage.keyPressed != 522 && positionXShell < 1280 && positionXShell > 0 && positionYShell<720 && positionYShell>0 ){
+            if(IsepRampage.keyPressed != 522 && positionXShell < 1280 && positionXShell > 0 && positionYShell<720 && positionYShell>0){
                 if(typeShell == 1){ 
                     NormalShell launchedShell = new NormalShell(positionXShell, positionYShell, initPosSx, initPosSy);
 
@@ -223,6 +223,8 @@ public class Environement extends JComponent {
                     positionXShell = launchedShell.positionSx;
                     positionYShell = launchedShell.positionSy;
                     time = time + incrementTime;
+                    launchedShell.collideFloor();
+                    
                 }
 
                 else if (typeShell == 2){        
@@ -233,6 +235,7 @@ public class Environement extends JComponent {
                     positionXShell = launchedShell.positionSx;
                     positionYShell = launchedShell.positionSy;
                     time = time + incrementTime;
+                    launchedShell.collideFloor();
                 }
 
                 else if (typeShell == 3){
@@ -244,6 +247,7 @@ public class Environement extends JComponent {
                     positionXShell = launchedShell.positionSx;
                     positionYShell = launchedShell.positionSy;
                     time = time + incrementTime;
+                    launchedShell.collideFloor();
                 }
                 else if (typeShell == 4){
                     SabotShell launchedShell = new SabotShell(positionXShell, positionYShell, initPosSx, initPosSy);
@@ -253,6 +257,8 @@ public class Environement extends JComponent {
                     positionXShell = launchedShell.positionSx;
                     positionYShell = launchedShell.positionSy;
                     time = time + incrementTime;
+                    launchedShell.collideFloor();
+                    
                 }
             }
             else{

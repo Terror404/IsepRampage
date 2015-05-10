@@ -12,6 +12,7 @@ public abstract class Shell {
         public double initPosSy;
         public double gunAngle;
         public double time;
+        public int radius;
 	protected Color c;
 	
 	public Shell (double positionSx, double positionSy, double initPosSx, double initPosSy){
@@ -24,4 +25,5 @@ public abstract class Shell {
 	abstract void display();
 	
 	abstract void move(double gunAngle, double time);
+        abstract void collideFloor();
 }
