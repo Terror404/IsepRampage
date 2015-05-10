@@ -1,6 +1,9 @@
 
 package Object;
 
+import Environement.Environement;
+import static Environement.Environement.floorMemoryX;
+import static Environement.Environement.floorMemoryY;
 import java.awt.Color;
 
 public abstract class Shell {
@@ -12,7 +15,7 @@ public abstract class Shell {
         public double initPosSy;
         public double gunAngle;
         public double time;
-        public int radius;
+        protected int radius = 10 ;
 	protected Color c;
 	
 	public Shell (double positionSx, double positionSy, double initPosSx, double initPosSy){
@@ -25,5 +28,25 @@ public abstract class Shell {
 	abstract void display();
 	
 	abstract void move(double gunAngle, double time);
-        abstract void collideFloor();
+        public void collideFloor(){
+            
+            
+            
+            if((int)((positionSy+5))<=(int)(floorMemoryY[(int)((positionSx+15)/5)]+5) && (int)(positionSy+5)>=(int)(floorMemoryY[(int)((positionSx+15)/5)])){
+                floorMemoryY[(int)((positionSx+15)/5)]=floorMemoryY[(int)((positionSx+15)/5)]+5*radius;
+                for(int i = 0; i < radius; i++){
+                    if(floorMemoryY[(int)((positionSx+15)/5)-i]<floorMemoryY[(int)((positionSx+15)/5)-i+1]-i)
+                    floorMemoryY[(int)((positionSx+15)/5)-i]=floorMemoryY[(int)((positionSx+15)/5)-i+1]-i;
+                }
+                for(int i = 0; i < radius; i++){
+                    if(floorMemoryY[(int)((positionSx+15)/5)+i]<floorMemoryY[(int)((positionSx+15)/5)+i-1]-i){
+                    floorMemoryY[(int)((positionSx+15)/5)+i]=floorMemoryY[(int)((positionSx+15)/5)+i-1]-i;
+                }
+                }
+                Environement.shellCollided=1;
+                System.out.print("..............................................................................................");
+            }
+            
+            
+        }
 }

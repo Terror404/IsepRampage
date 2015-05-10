@@ -36,19 +36,5 @@ public class HeavyShell extends Shell {
             positionSy = (gravity * time * time)/2 - initialSpeed * Math.sin(gunAngle) * time + initPosSy;
         }
         }
-        public void collideFloor(){
-            
-            if((int)((positionSy+5)/5)==(int)(floorMemoryY[(int)((positionSx-15)/5)]/5)){
-                floorMemoryY[(int)(positionSx/5)]=floorMemoryY[(int)(positionSx/5)]-5*radius;
-                for(int i = 0; i < radius; i++){
-                    if(floorMemoryY[(int)(positionSx/5)-i]<floorMemoryY[(int)(positionSx/5)-i+1]-i)
-                    floorMemoryY[(int)(positionSx/5)-i]=floorMemoryY[(int)(positionSx/5)-i+1]-i+i/3;
-                }
-                for(int i = 0; i < radius; i++){
-                    if(floorMemoryY[(int)(positionSx/5)+i]<floorMemoryY[(int)(positionSx/5)+i-1]-i){
-                    floorMemoryY[(int)(positionSx/5)+i]=floorMemoryY[(int)(positionSx/5)+i-1]-i+i/3;
-                    }
-                }
-            }   
-        }
+        
 }

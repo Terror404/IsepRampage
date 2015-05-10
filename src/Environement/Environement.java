@@ -116,7 +116,7 @@ public class Environement extends JComponent {
 
 //************ HANDLE KEYBOARD EVENTS - FREE MOVE AND AIM *********************            
 
-               if(IsepRampage.keyPressed==37 && leftTank.positionY<floorMemoryY[(int)(leftTank.positionX/5)-1]+5){ //if we press the left button and there isn't a mountain ahead of the tank
+               if(IsepRampage.keyPressed==37 && leftTank.positionY<floorMemoryY[(int)(leftTank.positionX/5)]+5){ //if we press the left button and there isn't a mountain ahead of the tank
                     leftTank.moveTankLeft();
                     
                     
@@ -213,7 +213,7 @@ public class Environement extends JComponent {
             else{
             
             
-            if(IsepRampage.keyPressed != 522 && positionXShell < 1280 && positionXShell > 0 && positionYShell<720 && (int) (positionYShell+5) != (int)(floorMemoryY[(int)(positionXShell+15)/5]+5)/5 && shellCollided==0){
+            if(IsepRampage.keyPressed != 522 && positionXShell < 1400 && positionXShell > 0 && positionYShell<720 && (int) (positionYShell+5) != (int)(floorMemoryY[(int)(positionXShell+15)/5]+5)/5 && shellCollided==0){
                  /*System.out.println("position en y : " + positionYShell+5 );
                  System.out.println(floorMemoryY[(int)(positionXShell-15)/5]);*/
                 if(typeShell == 1){ 
