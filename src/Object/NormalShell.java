@@ -23,7 +23,7 @@ public class NormalShell extends Shell {
     public void move(double gunAngle, double time){
         if (gunAngle > 0 && gunAngle < (Math.PI)/2){
             positionSx = initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
-            positionSy = (gravity * time * time)/2 + initialSpeed * Math.sin(gunAngle) * time + initPosSy;
+            positionSy = (gravity * time * time)/2 - initialSpeed * Math.sin(gunAngle) * time + initPosSy;
         }
         else if (gunAngle > (Math.PI)/2 && gunAngle < Math.PI){
             positionSx = - initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
@@ -35,7 +35,7 @@ public class NormalShell extends Shell {
         }
         else if (gunAngle > 3*(Math.PI)/2 && gunAngle < 2*(Math.PI)){
             positionSx = initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
-            positionSy = (gravity * time * time)/2 - initialSpeed * Math.sin(gunAngle) * time + initPosSy;
+            positionSy = (gravity * time * time)/2 + initialSpeed * Math.sin(gunAngle) * time + initPosSy;
         }
     }
 
