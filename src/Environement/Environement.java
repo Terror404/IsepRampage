@@ -213,7 +213,7 @@ public class Environement extends JComponent {
             else{
             
             
-            if(IsepRampage.keyPressed != 522 && positionXShell < 1400 && positionXShell > 0 && positionYShell<720 && (int) (positionYShell+5) != (int)(floorMemoryY[(int)(positionXShell+15)/5]+5)/5 && shellCollided==0){
+            if(IsepRampage.keyPressed != 522 && positionXShell < 1300 && positionXShell > 0 && positionYShell<720 && (int) (positionYShell+5) != (int)(floorMemoryY[(int)(positionXShell+15)/5]+5)/5 && shellCollided==0){
                  /*System.out.println("position en y : " + positionYShell+5 );
                  System.out.println(floorMemoryY[(int)(positionXShell-15)/5]);*/
                 if(typeShell == 1){ 
