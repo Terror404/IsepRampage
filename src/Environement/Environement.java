@@ -193,7 +193,7 @@ public class Environement extends JComponent {
                 gunAngle = (Math.atan2((positionYleftTank - positionGunYleftTank + 5), (positionGunXleftTank - positionXleftTank + 5)));
             }
         }
-        
+        System.out.println("angle = " + Math.toDegrees(gunAngle));
         
         
         
@@ -223,7 +223,7 @@ public class Environement extends JComponent {
                    /*
                     System.out.println("temps : " + time);*/
 
-                    launchedShell.move(gunAngle, time);
+                    launchedShell.move(Math.toDegrees(gunAngle), time);
                     new DrawShell(g2d, launchedShell, positionXShell, positionYShell, colorShell);
                     positionXShell = launchedShell.positionSx;
                     positionYShell = launchedShell.positionSy;
