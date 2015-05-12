@@ -23,11 +23,12 @@ public class IsepRampage {
     final static int Y_MAX=720;
     public static int v=0;
     public static int keyPressed;
+    public static int keyReleased;
     
     public static JFrame window = new JFrame(".");
     
     
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException {           
       
       
        

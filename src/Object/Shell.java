@@ -32,7 +32,7 @@ public abstract class Shell {
             
             
             
-            if((int)((positionSy+5))<=(int)(floorMemoryY[(int)((positionSx+15)/5)]+5) && (int)(positionSy+5)>=(int)(floorMemoryY[(int)((positionSx+15)/5)])){
+            if(positionSy-5> floorMemoryY[(int)(positionSx+15)/5]){
                 floorMemoryY[(int)((positionSx+15)/5)]=floorMemoryY[(int)((positionSx+15)/5)]+5*radius;
                 for(int i = 0; i < radius; i++){
                     if(floorMemoryY[(int)((positionSx+15)/5)-i]<floorMemoryY[(int)((positionSx+15)/5)-i+1]-i)
@@ -49,4 +49,7 @@ public abstract class Shell {
             
             
         }
+        
+        
+        
 }

@@ -15,7 +15,7 @@ import javax.swing.JComponent;
         
         
         g2d.setColor(Color.green);
-        g2d.fillOval(positionX,positionY,10,10 );
+        g2d.fillRect(positionX,positionY,10,10 );
         g2d.setColor(Color.red);
         g2d.fillRect(positionX,positionY-5,hp/10,2);
         g2d.drawLine(tank.positionX+5,tank.positionY+5,(int)tank.positionGunX,(int)tank.positionGunY);

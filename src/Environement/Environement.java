@@ -47,6 +47,7 @@ public class Environement extends JComponent {
     private int fired;
     private int typeShell;
     private int setShell;
+    public static double powerShoot=0;
     private double positionXShell;
     private double positionYShell;
     private double initPosSx = positionXleftTank;
@@ -54,7 +55,8 @@ public class Environement extends JComponent {
     public double gunAngle;
     public double gunAngle2;
     public double time = 0;
-    public double incrementTime = 0.01;
+    public double incrementTime = 0.05;
+    
     public static int shellCollided=0;
     
     public int setWind = 0;
@@ -153,6 +155,7 @@ public class Environement extends JComponent {
             if(IsepRampage.keyPressed == 49){           /*  touche "&"  */
                 typeShell = 1;
                 colorShell = 1;
+                
             }
             else if(IsepRampage.keyPressed == 50){      /*  touche "é"  */
                 typeShell = 2;
@@ -167,33 +170,42 @@ public class Environement extends JComponent {
                 colorShell = 4;
             }
 
-            if(IsepRampage.keyPressed == 61 && (typeShell == 1 || typeShell == 2 || typeShell == 3 || typeShell == 4)){           /*  Touche "="  */
-                fired = 1;
+            if(IsepRampage.keyPressed == 61 && (typeShell == 1 || typeShell == 2 || typeShell == 3 || typeShell == 4)&& IsepRampage.keyReleased!=61 ){           /*  Touche "="  */
+                
+                if(powerShoot<200.0){
+                powerShoot=powerShoot+0.2;
+                }
             }
+            if(IsepRampage.keyReleased==61 && (typeShell == 1 || typeShell == 2 || typeShell == 3 || typeShell == 4)&& IsepRampage.keyPressed!=61 ){
+                fired = 1;
+                }
         }
         
         // ************* DETERMINATION OF THE GUN ANGLE *******************
         
         if (positionYleftTank + 5 < positionGunYleftTank){
             if (positionGunXleftTank < positionXleftTank + 5){
-                gunAngle2 = (Math.atan2((positionGunYleftTank - positionYleftTank + 5), (positionXleftTank + 5 - positionGunXleftTank)));
-                gunAngle = Math.PI + gunAngle2;
+                gunAngle2 = (Math.atan2((positionGunYleftTank - leftTank.positionY + 5), (leftTank.positionX + 5 - positionGunXleftTank)));
+                gunAngle =  (Math.PI + gunAngle2);
             }
             else{
-                gunAngle2 = (Math.atan2((positionGunYleftTank - positionYleftTank + 5), (positionGunXleftTank - positionXleftTank + 5 )));
-                gunAngle = 2 * Math.PI - gunAngle2;
+                gunAngle2 = (Math.atan2((positionGunYleftTank - leftTank.positionY  + 5), (positionGunXleftTank - leftTank.positionX  + 5 )));
+                gunAngle =  (2 * Math.PI - gunAngle2);
             }
         }
         else{
             if(positionGunXleftTank < positionXleftTank + 5){
-                gunAngle2 = (Math.atan2((positionYleftTank + 5 - positionGunYleftTank), (positionXleftTank + 5 - positionGunXleftTank)));
-                gunAngle = Math.PI - gunAngle2;
+                gunAngle2 = (Math.atan2((leftTank.positionY + 5 - positionGunYleftTank), (leftTank.positionX + 5 - positionGunXleftTank)));
+                gunAngle =  (Math.PI - gunAngle2);
             }
             else{
-                gunAngle = (Math.atan2((positionYleftTank - positionGunYleftTank + 5), (positionGunXleftTank - positionXleftTank + 5)));
+                gunAngle = (2*Math.atan2((leftTank.positionY - positionGunYleftTank + 5), (positionGunXleftTank - leftTank.positionX  + 5)));
             }
         }
-        
+       /* System.out.println(time);
+        System.out.println((10* time * time)/2);*/
+        System.out.println( powerShoot);
+        System.out.println(fired);
         
         
         
@@ -213,7 +225,7 @@ public class Environement extends JComponent {
             else{
             
             
-            if(IsepRampage.keyPressed != 522 && positionXShell < 1300 && positionXShell > 0 && positionYShell<720 && (int) (positionYShell+5) != (int)(floorMemoryY[(int)(positionXShell+15)/5]+5)/5 && shellCollided==0){
+            if(IsepRampage.keyPressed != 522 && positionXShell < 1300 && positionXShell > 0 && positionYShell-5< floorMemoryY[(int)(positionXShell+15)/5] && shellCollided==0){
                  /*System.out.println("position en y : " + positionYShell+5 );
                  System.out.println(floorMemoryY[(int)(positionXShell-15)/5]);*/
                 if(typeShell == 1){ 
@@ -256,7 +268,7 @@ public class Environement extends JComponent {
                 }
                 else if (typeShell == 4){
                     SabotShell launchedShell = new SabotShell(positionXShell, positionYShell, initPosSx, initPosSy);
-                    launchedShell.move(gunAngle, time);
+                    launchedShell.move(gunAngle, time/5);
                     new DrawShell(g2d, launchedShell, launchedShell.positionSx, launchedShell.positionSy, colorShell);
                     
                     positionXShell = launchedShell.positionSx;
@@ -269,14 +281,15 @@ public class Environement extends JComponent {
             else{
                 typeShell = 0;
                 colorShell = 0;
-                fired = 0;
+                
                 positionXShell = positionXleftTank;
                 positionYShell = positionYleftTank; 
                 time = 0;
                 setShell=0;
+                powerShoot=0;
                 if(shellCollided==1){
                 
-                
+                fired=0;
                 shellCollided=0;
             }
             }

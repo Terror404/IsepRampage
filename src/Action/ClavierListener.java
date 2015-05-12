@@ -20,7 +20,8 @@ public class ClavierListener implements KeyListener{
 
     public void keyReleased(KeyEvent event) {
                
-       IsepRampage.keyPressed=0;                
+       IsepRampage.keyPressed=0;
+       IsepRampage.keyReleased=event.getKeyCode();
     }
 
     public void keyTyped(KeyEvent event) {
