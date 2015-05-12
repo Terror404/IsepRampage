@@ -235,7 +235,7 @@ public class Environement extends JComponent {
                    /*
                     System.out.println("temps : " + time);*/
 
-                    launchedShell.move(gunAngle, time);
+                    launchedShell.move(Math.toDegrees(gunAngle), time);
                     new DrawShell(g2d, launchedShell, positionXShell, positionYShell, colorShell);
                     positionXShell = launchedShell.positionSx;
                     positionYShell = launchedShell.positionSy;
