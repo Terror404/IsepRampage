@@ -21,32 +21,38 @@ public class Tank extends JComponent{
     private static final long serialVersionUID = 1L;
     public int positionX;
     public int positionY;
+    public int index;
     public double positionGunX;
     public double positionGunY;
     public int hp;
     
     
-    public Tank(int positionX,int positionY,double positionGunX, double positionGunY, int hp){
+    public Tank(int positionX,int positionY,int index,double positionGunX, double positionGunY, int hp){
        this.positionX=positionX;
        this.positionY=positionY;
        this.positionGunX=positionGunX;
        this.positionGunY=positionGunY;
+       this.index=index;
        
        this.hp=hp;
     }
     
     public void moveTankLeft(){
+        index=index-1;
+        positionGunX=positionGunX-(Environement.floorMemoryX[index]-Environement.floorMemoryX[index-1]);
+        positionX=Environement.floorMemoryX[index];
         
-        positionX=positionX-1;
-        positionGunX=positionGunX-1;
+        
         
         
         
     }
     public void moveTankRight(){
+        index=index+1;
+        positionGunX=positionGunX-(Environement.floorMemoryX[index]-Environement.floorMemoryX[index+1]);
+        positionX=Environement.floorMemoryX[index];
         
-        positionX=positionX+1;
-        positionGunX=positionGunX+1;
+        
         
         
         
@@ -57,12 +63,14 @@ public class Tank extends JComponent{
     if(positionGunY<=positionY+5 && positionGunX>positionX+5 && positionGunY>positionY-10){
         positionGunX=positionGunX-0.05;
         positionGunY=positionGunY-0.05;
+        /*positionGunY=Math.sqrt(100-(positionGunX-positionX-5)*(positionGunX-positionX-5))+positionY;*/
         
     }
     else if(positionGunY>positionY+5 && positionGunX>positionX+5){
         positionGunX=positionGunX+0.05;
         positionGunY=positionGunY-0.05;
     }
+    
     else if(positionGunY<=positionY+5 && positionGunX<=positionX+5 && positionGunY>positionY-10){
         positionGunX=positionGunX+0.05;
         positionGunY=positionGunY+0.05;
@@ -104,14 +112,15 @@ public class Tank extends JComponent{
     
     public void handleGravity(){
         
-        if(Environement.positionYleftTank!=Environement.floorMemoryY[Environement.positionXleftTank/5]-10){
-            positionGunY=positionGunY-Environement.positionYleftTank+Environement.floorMemoryY[Environement.positionXleftTank/5]-10;
-            Environement.positionYleftTank=Environement.floorMemoryY[Environement.positionXleftTank/5]-10;
+        if(positionY!=Environement.floorMemoryY[index]||positionY!=Environement.floorMemoryY[index]-10){
+            if(positionGunY>positionY-5 && positionGunY<positionY+15){
+            positionGunY=positionGunY-positionY+Environement.floorMemoryY[index]-10;
+            }
+            
+            positionY=Environement.floorMemoryY[index]-10;
             
         }
-        if(Environement.positionYrightTank!=Environement.floorMemoryY[Environement.positionXrightTank/5]-10){
-            Environement.positionYrightTank=Environement.floorMemoryY[Environement.positionXrightTank/5]-10;
-        }
+        
         
         
         
@@ -119,7 +128,16 @@ public class Tank extends JComponent{
     }
     public void handleGun(){
         if(positionGunX>positionX+15){
-            positionGunX=positionGunX-0.1;
+            positionGunX=positionX+15;
+        }
+        if(positionGunX<positionX-10){
+            positionGunX=positionX-5;
+        }
+        if(positionGunY<positionY-5){
+            positionGunY=positionY-5;
+        }
+        if(positionGunY>positionY+15){
+            positionGunY=positionY+15;
         }
     }
     public void loseHp(Shell shell){

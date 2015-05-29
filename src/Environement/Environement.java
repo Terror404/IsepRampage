@@ -30,14 +30,16 @@ public class Environement extends JComponent {
 
     public static final long serialVersionUID = 1L;
     public static boolean Generation = false;
-    public static int floorMemoryX[] = new int[Generator.nbrPoints];
-    public static int floorMemoryY[] = new int[Generator.nbrPoints];
+    public static int floorMemoryX[] = new int[2000];
+    public static int floorMemoryY[] = new int[2000];
     public static int positionXleftTank = 5 * 10 + 5 * (int) ((Math.random() - 0.5));
     public static int positionYleftTank;
     public static int positionXrightTank = 5 * 240 + 5 * (int) ((Math.random() - 0.5));
     public static int positionYrightTank;
     public static double positionGunXleftTank;
     public static double positionGunYleftTank;
+    public static int indexLeftTank;
+    public static int indexRightTank;
     public static int speedLeftTank = 1;
     public static int f = 0;
     public static boolean drawEnvironement = false;
@@ -48,7 +50,7 @@ public class Environement extends JComponent {
     private int typeShell;
     private int setShell;
     public static double powerShoot=0;
-    private double positionXShell;
+    public static double positionXShell;
     private double positionYShell;
     private double initPosSx = positionXleftTank;
     private double initPosSy = positionYleftTank;
@@ -94,8 +96,10 @@ public class Environement extends JComponent {
         
         if (setTank == false) { //set the tanks position randomly
 
-                positionYleftTank = floorMemoryY[positionXleftTank / 5] - 10;
-                positionYrightTank = floorMemoryY[positionXrightTank / 5] - 10;
+                indexLeftTank=(int)(positionXleftTank/5 );
+                indexRightTank=(int)(positionXrightTank/5 );
+                positionYleftTank = floorMemoryY[indexLeftTank] - 10;
+                positionYrightTank = floorMemoryY[indexRightTank] - 10;
                 positionGunXleftTank=(double)positionXleftTank+15;
                 positionGunYleftTank=(double)positionYleftTank+5;
                 
@@ -106,26 +110,28 @@ public class Environement extends JComponent {
         
 //************  CREATE THE TANKS **********************************************        
         
-            Tank leftTank = new Tank(positionXleftTank, positionYleftTank - (floorMemoryY[positionXleftTank / 5] - floorMemoryY[(positionXleftTank / 5) + 1]),positionGunXleftTank,positionGunYleftTank,100);
-            Tank rightTank = new Tank(positionXrightTank, positionYrightTank - (floorMemoryY[positionXrightTank / 5] - floorMemoryY[(positionXrightTank / 5) + 1]),positionXrightTank-2,positionYrightTank - (floorMemoryY[positionXrightTank / 5] - floorMemoryY[(positionXrightTank / 5) + 1])+5,100);
-
+            //Tank leftTank = new Tank(positionXleftTank, positionYleftTank - (floorMemoryY[indexLeftTank] - floorMemoryY[(indexLeftTank) + 1]),indexLeftTank,positionGunXleftTank,positionGunYleftTank,100);
+            Tank rightTank = new Tank(positionXrightTank, positionYrightTank - (floorMemoryY[positionXrightTank / 5] - floorMemoryY[(positionXrightTank / 5) + 1]),indexRightTank,positionXrightTank-2,positionYrightTank - (floorMemoryY[positionXrightTank / 5] - floorMemoryY[(positionXrightTank / 5) + 1])+5,100);
+            Tank leftTank = new Tank(positionXleftTank, positionYleftTank +(floorMemoryY[indexLeftTank] - floorMemoryY[(indexLeftTank) + 1]),indexLeftTank,positionGunXleftTank,positionGunYleftTank,100);
             leftTank.handleGravity();
             leftTank.handleGun();
-            rightTank.handleGravity();
+            //rightTank.handleGravity();
 
             
 
 
 //************ HANDLE KEYBOARD EVENTS - FREE MOVE AND AIM *********************            
 
-               if(IsepRampage.keyPressed==37 && leftTank.positionY<floorMemoryY[(int)(leftTank.positionX/5)]+5){ //if we press the left button and there isn't a mountain ahead of the tank
+               if(IsepRampage.keyPressed==37 && leftTank.positionY<floorMemoryY[(int)(indexLeftTank)]+10){ //if we press the left button and there isn't a mountain ahead of the tank
                     leftTank.moveTankLeft();
+                    indexLeftTank=leftTank.index;
                     
                     
                     
                 }
-                else if(IsepRampage.keyPressed==39 && leftTank.positionY<floorMemoryY[(int)(leftTank.positionX/5)+2]+5){//if we press the right button and there isn't a mountain ahead of the tank
+                else if(IsepRampage.keyPressed==39 && leftTank.positionY<floorMemoryY[(int)(indexLeftTank)+1]+10){//if we press the right button and there isn't a mountain ahead of the tank
                     leftTank.moveTankRight();
+                    indexLeftTank=leftTank.index;
                     
                     
                 
@@ -173,18 +179,18 @@ public class Environement extends JComponent {
             if(IsepRampage.keyPressed == 61 && (typeShell == 1 || typeShell == 2 || typeShell == 3 || typeShell == 4)&& IsepRampage.keyReleased!=61 ){           /*  Touche "="  */
                 
                 if(powerShoot<200.0){
-                powerShoot=powerShoot+0.2;
+                powerShoot=powerShoot+0.4;
                 }
             }
-            if(IsepRampage.keyReleased==61 && (typeShell == 1 || typeShell == 2 || typeShell == 3 || typeShell == 4)&& IsepRampage.keyPressed!=61 ){
+            if(IsepRampage.keyReleased==61 && (typeShell == 1 || typeShell == 2 || typeShell == 3 || typeShell == 4)&& IsepRampage.keyPressed==61 ){
                 fired = 1;
                 }
         }
         
         // ************* DETERMINATION OF THE GUN ANGLE *******************
         
-        if (positionYleftTank + 5 < positionGunYleftTank){
-            if (positionGunXleftTank < positionXleftTank + 5){
+        if (positionYleftTank + 5 <= positionGunYleftTank){
+            if (positionGunXleftTank <= positionXleftTank + 5){
                 gunAngle2 = (Math.atan2((positionGunYleftTank - leftTank.positionY + 5), (leftTank.positionX + 5 - positionGunXleftTank)));
                 gunAngle =  (Math.PI + gunAngle2);
             }
@@ -192,9 +198,10 @@ public class Environement extends JComponent {
                 gunAngle2 = (Math.atan2((positionGunYleftTank - leftTank.positionY  + 5), (positionGunXleftTank - leftTank.positionX  + 5 )));
                 gunAngle =  (2 * Math.PI - gunAngle2);
             }
+            
         }
         else{
-            if(positionGunXleftTank < positionXleftTank + 5){
+            if(positionGunXleftTank <= positionXleftTank + 5){
                 gunAngle2 = (Math.atan2((leftTank.positionY + 5 - positionGunYleftTank), (leftTank.positionX + 5 - positionGunXleftTank)));
                 gunAngle =  (Math.PI - gunAngle2);
             }
@@ -202,10 +209,13 @@ public class Environement extends JComponent {
                 gunAngle = (2*Math.atan2((leftTank.positionY - positionGunYleftTank + 5), (positionGunXleftTank - leftTank.positionX  + 5)));
             }
         }
-       /* System.out.println(time);
+        System.out.println(positionXShell);/*
         System.out.println((10* time * time)/2);*/
-        System.out.println( powerShoot);
-        System.out.println(fired);
+        /*System.out.println( indexLeftTank);
+        System.out.println(floorMemoryY[indexLeftTank]);
+        System.out.println(leftTank.positionY);
+        System.out.println("-------------------------------");*/
+        
         
         
         
@@ -235,7 +245,7 @@ public class Environement extends JComponent {
                    /*
                     System.out.println("temps : " + time);*/
 
-                    launchedShell.move(Math.toDegrees(gunAngle), time);
+                    launchedShell.move(gunAngle, time);
                     new DrawShell(g2d, launchedShell, positionXShell, positionYShell, colorShell);
                     positionXShell = launchedShell.positionSx;
                     positionYShell = launchedShell.positionSy;
@@ -310,7 +320,7 @@ public class Environement extends JComponent {
         else if(positionXleftTank < 15){
             leftTank.positionX=15;
         }
-            new DrawTank(g2d, leftTank, leftTank.positionX, positionYleftTank - (floorMemoryY[positionXleftTank / 5] - floorMemoryY[(positionXleftTank / 5) + 1]),leftTank.hp);
+            new DrawTank(g2d, leftTank, leftTank.positionX, leftTank.positionY ,leftTank.hp);
             new DrawTank(g2d, rightTank, positionXrightTank, positionYrightTank - (floorMemoryY[positionXrightTank / 5] - floorMemoryY[(positionXrightTank / 5) + 1]),rightTank.hp);
             
             positionXleftTank=leftTank.positionX;

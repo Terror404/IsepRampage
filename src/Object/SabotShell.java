@@ -20,6 +20,9 @@ public class SabotShell extends Shell {
 	}
 	
 	public void move(double gunAngle, double time){
+        
+        
+        
         if (Math.toDegrees(gunAngle) > 0 && Math.toDegrees(gunAngle) < 90){
             positionSx = initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
             positionSy = (gravity * 10 * time * time)/2 - initialSpeed *Math.sin(gunAngle) * time + initPosSy;
