@@ -32,6 +32,7 @@ public class Generator extends JComponent{
      
      public Generator(Graphics2D g2d){
      if(setMap==false || i<nbrPoints+1){
+         Environement.floorMemoryIndexAdd[i]=0;
          if(i<nbrPoints+1){
          
          Environement.floorMemoryX[0]=0;

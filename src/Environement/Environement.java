@@ -32,6 +32,7 @@ public class Environement extends JComponent {
     public static boolean Generation = false;
     public static int floorMemoryX[] = new int[2000];
     public static int floorMemoryY[] = new int[2000];
+    public static int floorMemoryIndexAdd[]=new int[2000];
     public static int positionXleftTank = 5 * 10 + 5 * (int) ((Math.random() - 0.5));
     public static int positionYleftTank;
     public static int positionXrightTank = 5 * 240 + 5 * (int) ((Math.random() - 0.5));
@@ -173,7 +174,7 @@ public class Environement extends JComponent {
             }
             else if (IsepRampage.keyPressed == 52){     /*  touche"'"   */
                 typeShell = 4;
-                colorShell = 4;
+                colorShell = 4; 
             }
 
             if(IsepRampage.keyPressed == 61 && (typeShell == 1 || typeShell == 2 || typeShell == 3 || typeShell == 4)&& IsepRampage.keyReleased!=61 ){           /*  Touche "="  */
