@@ -17,7 +17,7 @@ import javax.swing.JComponent;
  *
  * @author Maktor
  */
-public class Tank extends JComponent{
+public class Tank{
     private static final long serialVersionUID = 1L;
     public int positionX;
     public int positionY;
@@ -40,7 +40,7 @@ public class Tank extends JComponent{
     public void moveTankLeft(){
         index=index-1;
         positionGunX=positionGunX-(Environement.floorMemoryX[index]-Environement.floorMemoryX[index-1]);
-        positionX=Environement.floorMemoryX[index];
+        positionX-=5;
         
         
         
@@ -50,7 +50,7 @@ public class Tank extends JComponent{
     public void moveTankRight(){
         index=index+1;
         positionGunX=positionGunX-(Environement.floorMemoryX[index]-Environement.floorMemoryX[index+1]);
-        positionX=Environement.floorMemoryX[index];
+        positionX+=5;
         
         
         
@@ -60,20 +60,20 @@ public class Tank extends JComponent{
     
     public void moveGunUp(){
     
-    if(positionGunY<=positionY+5 && positionGunX>positionX+5 && positionGunY>positionY-10){
+    if(positionGunY<=positionY+5 && positionGunX>=positionX+5 && positionGunY>positionY-10){
         positionGunX=positionGunX-0.05;
         positionGunY=positionGunY-0.05;
         /*positionGunY=Math.sqrt(100-(positionGunX-positionX-5)*(positionGunX-positionX-5))+positionY;*/
         
     }
-    else if(positionGunY>positionY+5 && positionGunX>positionX+5){
+    else if(positionGunY>positionY+5 && positionGunX>=positionX+5){
         positionGunX=positionGunX+0.05;
         positionGunY=positionGunY-0.05;
     }
     
     else if(positionGunY<=positionY+5 && positionGunX<=positionX+5 && positionGunY>positionY-10){
         positionGunX=positionGunX+0.05;
-        positionGunY=positionGunY+0.05;
+        positionGunY=positionGunY-0.05;
     }
     else if(positionGunY>positionY+5 && positionGunX<=positionX+5 ){
         positionGunX=positionGunX+0.05;
@@ -112,7 +112,7 @@ public class Tank extends JComponent{
     
     public void handleGravity(){
         
-        if(positionY!=Environement.floorMemoryY[index]||positionY!=Environement.floorMemoryY[index]-10){
+        if(positionY!=Environement.floorMemoryY[index]||positionY!=Environement.floorMemoryY[index]-5){
             if(positionGunY>positionY-5 && positionGunY<positionY+15){
             positionGunY=positionGunY-positionY+Environement.floorMemoryY[index]-10;
             }
@@ -140,9 +140,9 @@ public class Tank extends JComponent{
             positionGunY=positionY+15;
         }
     }
-    public void loseHp(Shell shell){
+    public void loseHp(int dmg){
         
-        
+        hp=hp-dmg;
         
     }
 }

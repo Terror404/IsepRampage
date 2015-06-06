@@ -24,6 +24,7 @@ public class IsepRampage {
     public static int v=0;
     public static int keyPressed;
     public static int keyReleased;
+    public static int endGame=0;
     
     public static JFrame window = new JFrame(".");
     
@@ -31,8 +32,26 @@ public class IsepRampage {
     public static void main(String[] args) throws InterruptedException {           
       
       
+       setWindow(window);
        
-       window.setTitle("IsepRampage");
+      
+       window.add(new Environement());
+       new IsepRampage();window.setVisible(true);
+     
+       
+       
+       
+       
+       
+       
+       
+    }
+    public IsepRampage() throws InterruptedException{
+        
+        
+    }
+    public static void setWindow(JFrame window){
+         window.setTitle("IsepRampage");
        window.setSize(IsepRampage.X_MAX,IsepRampage.Y_MAX);
        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        window.setLocationRelativeTo(null);
@@ -43,19 +62,6 @@ public class IsepRampage {
        JTextField jtf = new JTextField();
        window.add(jtf);
        jtf.addKeyListener(new ClavierListener()); 
-       window.add(new Environement());
-             
-       window.setVisible(true);
-       new IsepRampage();
-       
-       
-       
-       
-       
-    }
-    public IsepRampage() throws InterruptedException{
-        
-        
     }
     
 }
