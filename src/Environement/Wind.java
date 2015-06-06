@@ -32,6 +32,7 @@ public class Wind {
                 g2d.setColor(Color.BLUE);
                 g2d.drawString("Pas de vent", 30, 35);
                 g2d.fillOval(50, 50, 10, 10);
+                Environement.windForce=1;
                 
                 break;
             case 1 :

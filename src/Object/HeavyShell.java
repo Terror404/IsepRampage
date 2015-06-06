@@ -6,7 +6,7 @@ import java.awt.Color;
 
 public class HeavyShell extends Shell {
     
-    private double initialSpeed = 100+ Environement.powerShoot;
+    private double initialSpeed = 20+ Environement.powerShoot;
     public double gravity = 10;
     public double timeMultiplerXpos = 2;
     public int radius = 30;
@@ -34,7 +34,7 @@ public class HeavyShell extends Shell {
         }
         else if (Math.toDegrees(gunAngle) > 270 && Math.toDegrees(gunAngle) < 360){
             positionSx = initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
-            positionSy = (-gravity * 10* time * time)/2 - initialSpeed * Math.sin(gunAngle) * time + initPosSy;
+            positionSy = (gravity * 10* time * time)/2 - initialSpeed * Math.sin(gunAngle) * time + initPosSy;
         }
         }
 }

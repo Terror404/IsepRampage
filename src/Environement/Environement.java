@@ -117,7 +117,7 @@ public class Environement extends JComponent {
             
             new DrawG(g2d);
             try {
-                Thread.sleep(15);
+                Thread.sleep(12);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Environement.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -141,14 +141,14 @@ public class Environement extends JComponent {
 
 //************ HANDLE KEYBOARD EVENTS - FREE MOVE AND AIM *********************            
 
-               if(IsepRampage.keyPressed==37 && tankList.get(playerTurn%2).positionY<floorMemoryY[(int)(tankList.get(playerTurn%2).index)-1]+10){ //if we press the left button and there isn't a mountain ahead of the tank
+               if(IsepRampage.keyPressed==37 && tankList.get(playerTurn%2).positionY<floorMemoryY[(int)(tankList.get(playerTurn%2).index)-1]+10 &&tankList.get(playerTurn%2).positionX>5){ //if we press the left button and there isn't a mountain ahead of the tank
                     tankList.get(playerTurn%2).moveTankLeft();
                    // indexLeftTank=tankList.get(playerTurn%2).index;
                     
                     
                     
                 }
-                else if(IsepRampage.keyPressed==39 && tankList.get(playerTurn%2).positionY<floorMemoryY[(int)(tankList.get(playerTurn%2).index)+1]+10){//if we press the right button and there isn't a mountain ahead of the tank
+                else if(IsepRampage.keyPressed==39 && tankList.get(playerTurn%2).positionY<floorMemoryY[(int)(tankList.get(playerTurn%2).index)+1]+10 &&tankList.get(playerTurn%2).positionX<1250){//if we press the right button and there isn't a mountain ahead of the tank
                     tankList.get(playerTurn%2).moveTankRight();
                     //indexLeftTank=tankList.get(playerTurn%2).index;
                     
@@ -193,8 +193,8 @@ public class Environement extends JComponent {
 
             if(IsepRampage.keyPressed == 61 && (typeShell == 1 || typeShell == 2 || typeShell == 3 || typeShell == 4)&& IsepRampage.keyReleased!=61 ){           /*  Touche "="  */
                 
-                if(powerShoot<200.0){
-                powerShoot=powerShoot+0.4;
+                if(powerShoot<400.0){
+                powerShoot=powerShoot+1;
                 }
             }
             if(IsepRampage.keyReleased==61 && (typeShell == 1 || typeShell == 2 || typeShell == 3 || typeShell == 4)&& IsepRampage.keyPressed==61 ){
@@ -205,12 +205,12 @@ public class Environement extends JComponent {
         // ************* DETERMINATION OF THE GUN ANGLE *******************
         
         if (tankList.get(playerTurn%2).positionY+ 5 <= tankList.get(playerTurn%2).positionGunY){
-            if (tankList.get(playerTurn%2).positionGunX <= tankList.get(playerTurn%2).positionX + 5){
-                gunAngle2 = (Math.atan2((tankList.get(playerTurn%2).positionGunY - tankList.get(playerTurn%2).positionY + 5), (tankList.get(playerTurn%2).positionX + 5 - tankList.get(playerTurn%2).positionGunX)));
+            if (tankList.get(playerTurn%2).positionGunX < tankList.get(playerTurn%2).positionX + 5){
+                gunAngle2 = (Math.atan2((tankList.get(playerTurn%2).positionGunY - tankList.get(playerTurn%2).positionY - 5), (tankList.get(playerTurn%2).positionX + 5 - tankList.get(playerTurn%2).positionGunX)));
                 gunAngle =  (Math.PI + gunAngle2);
             }
             else{
-                gunAngle2 = (Math.atan2((tankList.get(playerTurn%2).positionGunY - tankList.get(playerTurn%2).positionY  + 5), (tankList.get(playerTurn%2).positionGunX - tankList.get(playerTurn%2).positionX  + 5 )));
+                gunAngle2 = (Math.atan2((tankList.get(playerTurn%2).positionGunY - tankList.get(playerTurn%2).positionY  - 5), (tankList.get(playerTurn%2).positionGunX - tankList.get(playerTurn%2).positionX  - 5 )));
                 gunAngle =  (2 * Math.PI - gunAngle2);
             }
             
@@ -221,7 +221,7 @@ public class Environement extends JComponent {
                 gunAngle =  (Math.PI - gunAngle2);
             }
             else{
-                gunAngle = (2*Math.atan2((tankList.get(playerTurn%2).positionY - tankList.get(playerTurn%2).positionGunY + 5), (tankList.get(playerTurn%2).positionGunX - tankList.get(playerTurn%2).positionX  + 5)));
+                gunAngle = (Math.atan2((tankList.get(playerTurn%2).positionY - tankList.get(playerTurn%2).positionGunY + 5), (tankList.get(playerTurn%2).positionGunX - tankList.get(playerTurn%2).positionX  - 5)));
             }
         }
         System.out.println(Math.toDegrees(gunAngle));
@@ -245,7 +245,7 @@ public class Environement extends JComponent {
             if (setShell == 0){
                 positionXShell = tankList.get(playerTurn%2).positionGunX;
                 positionYShell = tankList.get(playerTurn%2).positionGunY;
-                initPosSx = tankList.get(playerTurn%2).positionX+windForce;
+                initPosSx = tankList.get(playerTurn%2).positionX;
                 initPosSy = tankList.get(playerTurn%2).positionY;
                 setShell = 1;
             }
@@ -266,7 +266,7 @@ public class Environement extends JComponent {
                     new DrawShell(g2d, launchedShell, positionXShell, positionYShell, colorShell);
                     positionXShell = launchedShell.positionSx;
                     positionYShell = launchedShell.positionSy;
-                    time = time + incrementTime;
+                    time = time + incrementTime+windForce/10;
                     launchedShell.collideFloor(tankList.get((playerTurn+1)%2));
                     
                 }
@@ -278,7 +278,7 @@ public class Environement extends JComponent {
                     
                     positionXShell = launchedShell.positionSx;
                     positionYShell = launchedShell.positionSy;
-                    time = time + incrementTime;
+                    time = time + incrementTime+windForce/50;
                     launchedShell.collideFloor(tankList.get((playerTurn+1)%2));
                 }
 
@@ -290,7 +290,7 @@ public class Environement extends JComponent {
 
                     positionXShell = launchedShell.positionSx;
                     positionYShell = launchedShell.positionSy;
-                    time = time + incrementTime;
+                    time = time + incrementTime+windForce/100;
                     launchedShell.collideFloor(tankList.get((playerTurn+1)%2));
                 }
                 else if (typeShell == 4){
