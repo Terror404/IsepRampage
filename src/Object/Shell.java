@@ -33,12 +33,12 @@ public abstract class Shell {
         
         public void collideFloor(Tank tank){
             
-            if( positionSx<10 || positionSx>1250){
+            if( positionSx<10 || positionSx>1280){
                Environement.shellCollided=1;
                 Environement.playerTurn+=1; 
                 Environement.setWind=0;
             }
-            else if(positionSy-5> floorMemoryY[(int)(positionSx+15)/5]){
+            else if(positionSy-5>= floorMemoryY[(int)(positionSx+15)/5]){
                 
                 //calcul du premier point
                 

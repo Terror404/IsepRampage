@@ -19,7 +19,7 @@ public class Generator extends JComponent{
      
      public static ArrayList<Polygon> TilesG= new ArrayList<Polygon>();
      /*private int floorMemory[][]=new int[200][300];*/
-     private static int a =100;
+     private static int a =80;
      private static int i =2;
      private static int k =0;
      public static int nbrPoints=271;

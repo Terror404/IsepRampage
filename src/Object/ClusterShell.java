@@ -24,13 +24,13 @@ public class ClusterShell extends Shell {
 	}
 	
 	public void move(double gunAngle, double time){
-        if (Math.toDegrees(gunAngle) > 0 && Math.toDegrees(gunAngle) < 90){
+        if (Math.toDegrees(gunAngle) > 0 && Math.toDegrees(gunAngle) <= 90){
             positionSx = initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
             positionSy = (gravity * 10 * time * time)/2 - initialSpeed *Math.sin(gunAngle) * time + initPosSy;
         }
         else if (Math.toDegrees(gunAngle) > 90 && Math.toDegrees(gunAngle) < 180){
             positionSx = initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
-            positionSy = (gravity *10* time * time)/2 + initialSpeed * Math.sin(gunAngle) * time - initPosSy;
+            positionSy = (gravity *10* time * time)/2 - initialSpeed * Math.sin(gunAngle) * time + initPosSy;
         }
         else if (Math.toDegrees(gunAngle) > 180 && Math.toDegrees(gunAngle) < 270){
             positionSx = initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
@@ -38,7 +38,7 @@ public class ClusterShell extends Shell {
         }
         else if (Math.toDegrees(gunAngle) > 270 && Math.toDegrees(gunAngle) < 360){
             positionSx = initialSpeed * Math.cos(gunAngle)*time*timeMultiplerXpos + initPosSx;
-            positionSy = (-gravity * 10* time * time)/2 - initialSpeed * Math.sin(gunAngle) * time + initPosSy;
+            positionSy = (gravity * 10* time * time)/2 - initialSpeed * Math.sin(gunAngle) * time + initPosSy;
         }
         }
         

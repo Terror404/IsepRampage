@@ -141,7 +141,7 @@ public class Environement extends JComponent {
 
 //************ HANDLE KEYBOARD EVENTS - FREE MOVE AND AIM *********************            
 
-               if(IsepRampage.keyPressed==37 && tankList.get(playerTurn%2).positionY<floorMemoryY[(int)(tankList.get(playerTurn%2).index)-1]+10 &&tankList.get(playerTurn%2).positionX>5){ //if we press the left button and there isn't a mountain ahead of the tank
+               if(IsepRampage.keyPressed==37 && tankList.get(playerTurn%2).positionY<floorMemoryY[(int)(tankList.get(playerTurn%2).index)-1]+10 &&tankList.get(playerTurn%2).positionX>10){ //if we press the left button and there isn't a mountain ahead of the tank
                     tankList.get(playerTurn%2).moveTankLeft();
                    // indexLeftTank=tankList.get(playerTurn%2).index;
                     
@@ -172,6 +172,9 @@ public class Environement extends JComponent {
         
 
 // ********* HANDLE KEYBOARD EVENTS - SHELL CHOICE AND TRIGGER *************
+               if (IsepRampage.keyPressed == 52){     /*  touche"'"   */
+                fired=0;
+            }
         if (fired == 0){
             if(IsepRampage.keyPressed == 49){           /*  touche "&"  */
                 typeShell = 1;
@@ -190,6 +193,7 @@ public class Environement extends JComponent {
                 typeShell = 4;
                 colorShell = 4; 
             }
+            
 
             if(IsepRampage.keyPressed == 61 && (typeShell == 1 || typeShell == 2 || typeShell == 3 || typeShell == 4)&& IsepRampage.keyReleased!=61 ){           /*  Touche "="  */
                 
@@ -224,8 +228,8 @@ public class Environement extends JComponent {
                 gunAngle = (Math.atan2((tankList.get(playerTurn%2).positionY - tankList.get(playerTurn%2).positionGunY + 5), (tankList.get(playerTurn%2).positionGunX - tankList.get(playerTurn%2).positionX  - 5)));
             }
         }
-        System.out.println(Math.toDegrees(gunAngle));
-        System.out.println(Math.cos(gunAngle));
+        System.out.println(fired);
+        System.out.println();
         /*
         System.out.println((10* time * time)/2);*/
         /*System.out.println( indexLeftTank);
