@@ -15,8 +15,11 @@ import javax.swing.JComponent;
     public DrawTank(Graphics2D g2d,Tank tank,int hp){
         
         if(tank.hp>0){
+        g2d.setColor(Color.black); 
+        g2d.drawRect(tank.positionX,tank.positionY,10,10 );
         g2d.setColor(Color.green);
-        g2d.fillRect(tank.positionX,tank.positionY,10,10 );
+        
+        g2d.fillRect(tank.positionX+1,tank.positionY+1,9,9 );
         g2d.setColor(Color.red);
         g2d.fillRect(tank.positionX,tank.positionY-5,hp/10,2);
         g2d.drawLine(tank.positionX+5,tank.positionY+5,(int)tank.positionGunX,(int)tank.positionGunY);
