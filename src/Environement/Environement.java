@@ -141,7 +141,7 @@ public class Environement extends JComponent {
 
 //************ HANDLE KEYBOARD EVENTS - FREE MOVE AND AIM *********************            
 
-               if(IsepRampage.keyPressed==37 /*&& tankList.get(playerTurn%2).positionY<floorMemoryY[(int)(tankList.get(playerTurn%2).index)-1]+10*/ &&tankList.get(playerTurn%2).positionX>10 && tankList.get(playerTurn%2).fuel>0){ //if we press the left button and there isn't a mountain ahead of the tank
+               if(IsepRampage.keyPressed==37 && tankList.get(playerTurn%2).positionY<floorMemoryY[(int)(tankList.get(playerTurn%2).index)-1]+10 &&tankList.get(playerTurn%2).positionX>10 && tankList.get(playerTurn%2).fuel>0){ //if we press the left button and there isn't a mountain ahead of the tank
                     tankList.get(playerTurn%2).moveTankLeft();
                    // indexLeftTank=tankList.get(playerTurn%2).index;
                     

@@ -32,7 +32,19 @@ import javax.swing.JComponent;
             
         }
         
-        //System.out.println("je me dessine bien");
+        g2d.setColor(Color.black);
+        g2d.drawRect(30, 100, 25, 72);
+        for(int i=1;i<11;i++){
+            
+            if(Environement.powerShoot>40.0*(i-1)-1 && Environement.powerShoot!=0.0){
+                g2d.setColor(Color.black);
+                g2d.drawRect(31,165-7*(i-1),23,5);
+                Color c= new Color(255,255-24*i,0);
+                g2d.setColor(c);
+                g2d.fillRect(32,165-7*(i-1),22,5);
+            }
+        }
+       
     }
 }
 
