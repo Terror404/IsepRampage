@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 
-
 public class IsepRampage {
 
     final static int X_MAX=1280;
@@ -25,6 +24,7 @@ public class IsepRampage {
     public static int keyPressed;
     public static int keyReleased;
     public static int endGame=0;
+    private static boolean beginMusic=true;
     
     public static JFrame window = new JFrame(".");
     
@@ -36,11 +36,21 @@ public class IsepRampage {
        
       
        window.add(new Environement());
+       if(beginMusic==true){
+       try {
+java.applet.AudioClip clip =
+java.applet.Applet.newAudioClip(
+new java.net.URL("file:C://Users/Maktor/Music/Five Finger Death Punch/wickedWays.wav"));
+clip.play();
+} catch (java.net.MalformedURLException murle) {
+System.out.println(murle);
+}
+       }
        new IsepRampage();window.setVisible(true);
      
        
        
-       
+        //"file:C://Users/Maktor/Music/Five Finger Death Punch/wickedWays.wav"
        
        
        

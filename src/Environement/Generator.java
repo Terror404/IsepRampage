@@ -19,7 +19,7 @@ public class Generator extends JComponent{
      
      public static ArrayList<Polygon> TilesG= new ArrayList<Polygon>();
      /*private int floorMemory[][]=new int[200][300];*/
-     private static int a =80;
+     private static int a =90;
      private static int i =2;
      private static int k =0;
      public static int nbrPoints=271;
@@ -44,13 +44,13 @@ public class Generator extends JComponent{
          Environement.floorMemoryY[nbrPoints-1]=720;
          
          if(i<nbrPoints){
-           if(i%4==0 && (i<75||(i>200 && i<nbrPoints))){
+           if(i%3==0 && (i<75||(i>190 && i<nbrPoints))){
            a= (int) ((int) a+ (int) 4.0*(Math.random()-0.35));
            }
            else if(i%2==0 && i<140 && i>75){
                a= (int) ((int) a+ (int) 7.0*(Math.random()-0.75));
            }
-           else if(i%2==0 && i>140 && i<nbrPoints){
+           else if(i%2==0 && i>140 && i<190){
                a= (int) ((int) a+ (int) 7.0*(Math.random()-0.05));
            }
            

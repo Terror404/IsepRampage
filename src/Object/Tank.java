@@ -25,14 +25,16 @@ public class Tank{
     public double positionGunX;
     public double positionGunY;
     public int hp;
+    public int fuel;
     
     
-    public Tank(int positionX,int positionY,int index,double positionGunX, double positionGunY, int hp){
+    public Tank(int positionX,int positionY,int index,double positionGunX, double positionGunY, int hp,int fuel){
        this.positionX=positionX;
        this.positionY=positionY;
        this.positionGunX=positionGunX;
        this.positionGunY=positionGunY;
        this.index=index;
+       this.fuel=fuel;
        
        this.hp=hp;
     }
@@ -41,6 +43,7 @@ public class Tank{
         index=index-1;
         positionGunX=positionGunX-(Environement.floorMemoryX[index]-Environement.floorMemoryX[index-1]);
         positionX-=5;
+        fuel-=1;
         
         
         
@@ -51,7 +54,7 @@ public class Tank{
         index=index+1;
         positionGunX=positionGunX-(Environement.floorMemoryX[index]-Environement.floorMemoryX[index+1]);
         positionX+=5;
-        
+        fuel-=1;
         
         
         

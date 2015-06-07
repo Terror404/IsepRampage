@@ -37,14 +37,15 @@ public abstract class Shell {
                Environement.shellCollided=1;
                 Environement.playerTurn+=1; 
                 Environement.setWind=0;
+                Environement.tankList.get(Environement.playerTurn%2).fuel=100;
             }
-            else if(positionSy-5>= floorMemoryY[(int)(positionSx+15)/5]){
+            else if(positionSy-5> floorMemoryY[(int)(positionSx+15)/5]){
                 
                 //calcul du premier point
                 
                 shellAngle=Math.atan2(5*radius,5);
                 
-                if(tank.positionX<positionSx+radius+5 && tank.positionX>positionSx-radius-5){
+                if(tank.positionX<positionSx+5*radius && tank.positionX>positionSx-5*radius){
                     tank.loseHp(40);
                 }
                 
@@ -92,6 +93,7 @@ public abstract class Shell {
                 }
                 }
                 Environement.shellCollided=1;
+                Environement.tankList.get(Environement.playerTurn%2).fuel=100;
                 Environement.playerTurn+=1;
                 Environement.setWind=0;
                 System.out.print("..............................................................................................");
